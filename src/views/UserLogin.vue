@@ -200,7 +200,7 @@
                             忘记密码
                         </span>
           </div>
-          <button class="btn"> 登    录 </button>
+          <button class="btn" @click="handleLogin"> 登    录 </button>
         </div>
         <span class="register">还没有注册？快来创建一个新账号</span>
       </div>
@@ -208,6 +208,18 @@
   </div>
 </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    handleLogin() {
+      // 这里可以添加登录验证逻辑
+      // this.$router.push('/main');
+      alert("登录跳转主页ing");
+    }
+  }
+}
+</script>
 
 
 <style scoped>

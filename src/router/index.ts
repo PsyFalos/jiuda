@@ -19,11 +19,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/UserLogin.vue')
   }
+  //仿照添加主页MainPage的router
+  /*,
+  {
+    path: '/main',
+    name: 'MainPage',
+    component: () => import('../views/MainPage.vue')
+  }*/
 ]
 
 const router = createRouter({

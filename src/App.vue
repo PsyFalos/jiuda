@@ -5,7 +5,7 @@
     <router-link to="/login">UserLogin</router-link>
   </nav>
   <router-view/>
-</template>2
+</template>
 
 <style>
 #app {
