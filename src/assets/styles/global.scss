@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: Butler_Light;
+  font-weight: 700;
+  src: url(./font/Butler_Light.otf) format("truetype");
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Butler_Black;
+  font-weight: 700;
+  src: url(./font/Butler_Black.otf) format("truetype");
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Butler_Light;
+}
+
+body {
+  background-image: url(./bg.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #fff;
+}
