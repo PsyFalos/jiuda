@@ -282,7 +282,8 @@ export default {
   align-items: center;
   padding: 20% 10%;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.06);
+
+  background: rgba(46, 199, 218, 0.3);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
