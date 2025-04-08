@@ -17,6 +17,7 @@ import { createUniver, defaultTheme, LocaleType, merge } from '@univerjs/presets
 import { UniverSheetsCorePreset } from '@univerjs/presets/preset-sheets-core'
 import UniverPresetSheetsCoreZhCN from '@univerjs/presets/preset-sheets-core/locales/zh-CN'
 import '@univerjs/presets/lib/styles/preset-sheets-core.css'
+import {ElMessage} from "element-plus";
 
 const container = ref<HTMLElement | null>(null)
 let univerAPI: any = null
@@ -60,7 +61,7 @@ const saveWorkbook = () => {
 
   const workbookData = univerAPI.getActiveWorkbook()?.save()
   console.log('工作簿数据:', JSON.stringify(workbookData))
-
+  ElMessage.info('工作簿数据: '+JSON.stringify(workbookData))
   // 这里可以添加保存到后端的逻辑
   // axios.post('/api/save-workbook', workbookData)
   ElMessage.success('保存成功')

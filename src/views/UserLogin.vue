@@ -211,12 +211,15 @@
 </template>
 
 <script>
+import {ElMessage} from "element-plus";
+
 export default {
   methods: {
     handleLogin() {
       // 这里可以添加登录验证逻辑
-      this.$router.push('/about');
-      // alert("登录跳转主页ing");
+      ElMessage.success("登录成功，正在跳转...");
+      this.$router.push('/excel');
+
     }
   }
 }
