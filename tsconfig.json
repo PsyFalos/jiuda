@@ -18,6 +18,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@univerjs/presets/*": [
+        "node_modules/@univerjs/presets/lib/es/*"
       ]
     },
     "lib": [
@@ -25,6 +28,9 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],"typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
     ]
   },
   "include": [

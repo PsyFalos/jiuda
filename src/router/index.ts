@@ -4,8 +4,7 @@ import HomeView from '../views/HomeView.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/UserLogin.vue')
+    redirect: '/login',
     // component: HomeView,
     // meta: { transition: 'slide' }
   },

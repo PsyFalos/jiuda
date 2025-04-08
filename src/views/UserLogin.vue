@@ -137,6 +137,7 @@
       </div>
     </div>
   </div>-->
+
 <div class="body">
   <div class="content">
     <div class="introduce">
@@ -214,8 +215,8 @@ export default {
   methods: {
     handleLogin() {
       // 这里可以添加登录验证逻辑
-      // this.$router.push('/main');
-      alert("登录跳转主页ing");
+      this.$router.push('/about');
+      // alert("登录跳转主页ing");
     }
   }
 }

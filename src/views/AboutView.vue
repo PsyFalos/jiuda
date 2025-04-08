@@ -1,111 +1,82 @@
 <template>
-  <div class="menu-container">
-    <div class="menu-container" @mouseenter="showButton = true" @mouseleave="showButton = false">
-      <el-menu
-          class="processon-menu"
-          :collapse="isCollapse"
-          :collapse-transition="false"
-      >
-        <!-- 菜单项（根据图片内容示例） -->
-        <el-menu-item index="new">
-          <el-icon><Plus /></el-icon>
-          <span>+ 新建</span>
-        </el-menu-item>
-        <el-menu-item index="template">
-          <el-icon><Files /></el-icon>
-          <span>从模板新建</span>
-        </el-menu-item>
-        <el-menu-item index="new">
-          <el-icon><Plus /></el-icon>
-          <span>+ 新建</span>
-        </el-menu-item>
-        <el-menu-item index="template">
-          <el-icon><Files /></el-icon>
-          <span>从模板新建</span>
-        </el-menu-item>
-        <el-menu-item index="new">
-          <el-icon><Plus /></el-icon>
-          <span>+ 新建</span>
-        </el-menu-item>
-        <el-menu-item index="template">
-          <el-icon><Files /></el-icon>
-          <span>从模板新建</span>
-        </el-menu-item>
-        <!-- 其他菜单项... -->
-        
-      </el-menu>
-
-      <!-- 折叠按钮 -->
-      <transition name="fade">
-        <div
-            v-show="showButton"
-            class="processon-collapse-btn"
-            :class="{ 'collapsed': isCollapse }"
-            @click="isCollapse = !isCollapse"
-        >
-          <el-icon :size="14" color="#666">
-            <ArrowLeft v-if="!isCollapse" />
-            <ArrowRight v-else />
-          </el-icon>
-        </div>
-      </transition>
-    </div>
+  <div>
+    <el-button
+        type="primary"
+        @click="saveWorkbook"
+        style="margin-bottom: 20px; width: 100px;"
+    >
+      保 存
+    </el-button>
+    <div ref="container" class="univer-container"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ArrowLeft, ArrowRight, Plus, Files } from '@element-plus/icons-vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { createUniver, defaultTheme, LocaleType, merge } from '@univerjs/presets'
+import { UniverSheetsCorePreset } from '@univerjs/presets/preset-sheets-core'
+import UniverPresetSheetsCoreZhCN from '@univerjs/presets/preset-sheets-core/locales/zh-CN'
+import '@univerjs/presets/lib/styles/preset-sheets-core.css'
 
-const isCollapse = ref(false)
-const showButton = ref(false)
+const container = ref<HTMLElement | null>(null)
+let univerAPI: any = null
+
+onMounted(() => {
+  if (!container.value) return
+
+  const { univer, univerAPI: api } = createUniver({
+    locale: LocaleType.ZH_CN,
+    locales: {
+      [LocaleType.ZH_CN]: merge({}, UniverPresetSheetsCoreZhCN),
+    },
+    theme: defaultTheme,
+    presets: [
+      UniverSheetsCorePreset({
+        container: container.value, // 直接使用DOM元素
+      }),
+    ],
+  })
+
+  univerAPI = api
+  // 创建新工作簿
+  univerAPI.createWorkbook({
+    name: '我的表格',
+    sheets: [{
+      id: 'sheet-001',
+      name: 'Sheet1',
+      cellData: {
+        0: {
+          0: { v: 'Hello' },
+          1: { v: 'Univer' }
+        }
+      }
+    }]
+  })
+})
+
+// 保存工作簿
+const saveWorkbook = () => {
+  if (!univerAPI) return
+
+  const workbookData = univerAPI.getActiveWorkbook()?.save()
+  console.log('工作簿数据:', JSON.stringify(workbookData))
+
+  // 这里可以添加保存到后端的逻辑
+  // axios.post('/api/save-workbook', workbookData)
+  ElMessage.success('保存成功')
+}
+
+onBeforeUnmount(() => {
+  if (univerAPI) {
+    univerAPI.dispose()
+  }
+})
 </script>
 
-<style>
-.processon-menu {
-  border-right: none;
-  transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
-}
-
-.processon-menu:not(.el-menu--collapse) {
-  width: 240px; /* 与图片中的侧边栏宽度相似 */
-}
-
-.processon-collapse-btn {
-  position: absolute;
-  top: 50%;
-  left: 232px; /* 初始展开位置 */
-  transform: translateY(-50%);
-  width: 18px;
-  height: 32px;
-  background: #fff;
+<style scoped>
+.univer-container {
+  width: 100%;
+  height: calc(100vh - 100px);
   border: 1px solid #e8e8e8;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.2s;
-}
-
-.processon-collapse-btn.collapsed {
-  left: 56px; /* 折叠后的位置 */
-}
-
-.processon-collapse-btn:hover {
-  background: #f7f8fa;
-  border-color: #409eff;
-}
-
-.processon-collapse-btn:hover .el-icon {
-  color: #409eff !important;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
 }
 </style>
