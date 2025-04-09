@@ -20,6 +20,42 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "about" */ '../views/UserLogin.vue')
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import(/* webpackChunkName: "about" */ '../views/MainPage.vue'),
+    children: [
+      // 默认子路由
+      {
+        path: '',
+        redirect: { name: 'formula' }
+      },
+      // 公式页面
+      {
+        path: 'formula',
+        name: 'formula',
+        component: () => import('@/views/subpages/FormulaView.vue')
+      },
+      // 项目页面
+      {
+        path: 'projects',
+        name: 'projects',
+        component: () => import('@/views/subpages/Projects.vue')
+      },
+      // 最近公式
+      {
+        path: 'recent-formula',
+        name: 'recent-formula',
+        component: () => import('@/views/subpages/RecentFormula.vue')
+      },
+      // 模板社区
+      {
+        path: 'template-community',
+        name: 'template-community',
+        component: () => import('@/views/subpages/TemplateCommunity.vue')
+      }
+    ]
   }
   //仿照添加主页MainPage的router
   /*,

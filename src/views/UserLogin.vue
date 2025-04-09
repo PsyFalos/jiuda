@@ -218,7 +218,8 @@ export default {
     handleLogin() {
       // 这里可以添加登录验证逻辑
       ElMessage.success("登录成功，正在跳转...");
-      this.$router.push('/excel');
+      this.$router.push('/main');
+      // this.$router.push('/excel');
 
     }
   }
