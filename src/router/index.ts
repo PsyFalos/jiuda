@@ -3,12 +3,16 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    // 默认路由
     path: '/',
-    redirect: '/login',
+    // 可以根据自己要调试的页面修改默认路由
+    redirect: '/setting', // 首页定位到 账户中心
+    // redirect: '/login', // 首页定位到 登录
     // component: HomeView,
     // meta: { transition: 'slide' }
   },
   {
+    // excel表格
     path: '/excel',
     name: 'excel',
     // route level code-splitting
@@ -17,11 +21,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ExcelView.vue')
   },
   {
+    // 登录
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "about" */ '../views/UserLogin.vue')
   },
   {
+    // 登录
+    path: '/setting',
+    name: 'setting',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SettingView.vue')
+  },
+  {
+    // 工作空间主页
     path: '/main',
     name: 'main',
     component: () => import(/* webpackChunkName: "about" */ '../views/MainPage.vue'),
