@@ -2,6 +2,12 @@
   <router-view/>
 </template>
 
+<style>
+html, body, #app { height: 100% }
+
+.el-container { height: 100vh }
+
+</style>
 <!--
 <style>
 #app {

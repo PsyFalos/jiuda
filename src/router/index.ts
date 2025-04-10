@@ -6,8 +6,8 @@ const routes: Array<RouteRecordRaw> = [
     // 默认路由
     path: '/',
     // 可以根据自己要调试的页面修改默认路由
-    redirect: '/setting', // 首页定位到 账户中心
-    // redirect: '/login', // 首页定位到 登录
+    // redirect: '/setting', // 首页定位到 账户中心
+    redirect: '/login', // 首页定位到 登录
     // component: HomeView,
     // meta: { transition: 'slide' }
   },
